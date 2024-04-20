@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
-    "rcli"
+    "rcli",
+    "zxcvbn"
   ],
   "editor.formatOnType": false, // required
   "editor.formatOnPaste": true, // optional
