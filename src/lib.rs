@@ -1,6 +1,5 @@
-mod opts;
+mod command;
 mod process;
 
-pub use opts::{Opts, SubCommand};
-pub use process::process_csv;
-pub use process::process_gen_pass;
+pub use command::{Base64SubCommand, Opts, SubCommand};
+pub use process::{process_base64_decode, process_base64_encode, process_csv, process_gen_pass};
