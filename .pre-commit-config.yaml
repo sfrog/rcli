@@ -11,7 +11,9 @@ repos:
       - id: end-of-file-fixer
         files: \.rs$
       - id: mixed-line-ending
+        files: \.rs$
       - id: trailing-whitespace
+        files: \.rs$
   - repo: https://github.com/psf/black
     rev: 22.10.0
     hooks:
