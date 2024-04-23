@@ -1,11 +1,11 @@
-use std::{fs::File, io::Read};
+use std::io::Read;
 
 use base64::{engine::GeneralPurpose, prelude::*};
 
-use crate::command::Base64Format;
+use crate::{command::Base64Format, get_reader};
 
-pub fn process_base64_encode(input: &str, format: Base64Format) -> anyhow::Result<()> {
-    let mut reader = get_reader(input);
+pub fn process_base64_encode(input: &str, format: Base64Format) -> anyhow::Result<String> {
+    let mut reader = get_reader(input)?;
 
     let mut buf = Vec::new();
     reader.read_to_end(&mut buf)?;
@@ -14,13 +14,11 @@ pub fn process_base64_encode(input: &str, format: Base64Format) -> anyhow::Resul
 
     let encode = engine.encode(buf);
 
-    println!("{}", encode);
-
-    Ok(())
+    Ok(encode)
 }
 
-pub fn process_base64_decode(input: &str, format: Base64Format) -> anyhow::Result<()> {
-    let mut reader = get_reader(input);
+pub fn process_base64_decode(input: &str, format: Base64Format) -> anyhow::Result<Vec<u8>> {
+    let mut reader = get_reader(input)?;
 
     let mut buf = String::new();
     reader.read_to_string(&mut buf)?;
@@ -29,16 +27,7 @@ pub fn process_base64_decode(input: &str, format: Base64Format) -> anyhow::Resul
     let engine = get_engine(format);
 
     let decode = engine.decode(buf)?;
-    println!("{}", String::from_utf8(decode)?);
-    Ok(())
-}
-
-fn get_reader(input: &str) -> Box<dyn Read> {
-    if input == "-" {
-        Box::new(std::io::stdin())
-    } else {
-        Box::new(File::open(input).expect("File not found"))
-    }
+    Ok(decode)
 }
 
 fn get_engine(format: Base64Format) -> GeneralPurpose {
