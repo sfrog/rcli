@@ -4,10 +4,9 @@ mod gen_pass;
 mod http;
 mod text;
 
-use std::path::{Path, PathBuf};
-
 use clap::Parser;
 use enum_dispatch::enum_dispatch;
+use std::path::{Path, PathBuf};
 
 pub use self::{base64::*, csv::*, gen_pass::*, http::*, text::*};
 

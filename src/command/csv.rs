@@ -1,10 +1,7 @@
-use std::fmt;
-
-use clap::Parser;
-
-use crate::{process, CmdExecutor};
-
 use super::verify_file;
+use crate::{process, CmdExecutor};
+use clap::Parser;
+use std::fmt;
 
 #[derive(Debug, Clone, Copy)]
 pub enum OutputFormat {

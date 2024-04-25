@@ -69,8 +69,6 @@ async fn file_handler(
 #[cfg(test)]
 mod tests {
     use super::*;
-    // use axum::http::{Request, Response};
-    // use std::net::SocketAddr;
 
     #[tokio::test]
     async fn test_file_handler() {
@@ -84,54 +82,4 @@ mod tests {
         assert_eq!(status, StatusCode::OK);
         assert!(content.trim().starts_with("[package]"));
     }
-
-    // #[tokio::test]
-    // async fn test_file_handler_not_found() {
-    //     let state = Arc::new(HttpServeState {
-    //         path: PathBuf::from("tests"),
-    //     });
-
-    //     let path = Path::from("not_found.txt");
-    //     let (status, content) = file_handler(State(state), path).await;
-
-    //     assert_eq!(status, StatusCode::NOT_FOUND);
-    //     assert_eq!(content, "File tests/not_found.txt not found");
-    // }
-
-    // #[tokio::test]
-    // async fn test_file_handler_error() {
-    //     let state = Arc::new(HttpServeState {
-    //         path: PathBuf::from("tests"),
-    //     });
-
-    //     let path = Path::from("error.txt");
-    //     let (status, content) = file_handler(State(state), path).await;
-
-    //     assert_eq!(status, StatusCode::INTERNAL_SERVER_ERROR);
-    //     assert!(content.contains("Error:"));
-    // }
-
-    // #[tokio::test]
-    // async fn test_process_http_serve() {
-    //     let path = PathBuf::from("tests");
-    //     let prot = 8080;
-    //     let addr = SocketAddr::from(([127, 0, 0, 1], prot));
-
-    //     let server = tokio::spawn(async move {
-    //         process_http_serve(path, prot).await.unwrap();
-    //     });
-
-    //     tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
-
-    //     let client = reqwest::Client::new();
-    //     let response = client
-    //         .get(format!("http://{}:{}/test.txt", addr.ip(), addr.port()))
-    //         .send()
-    //         .await
-    //         .unwrap();
-    //     assert_eq!(response.status(), StatusCode::OK);
-    //     assert_eq!(response.text().await.unwrap(), "Hello, world!\n");
-
-    //     server.abort();
-    // }
 }

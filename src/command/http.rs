@@ -1,6 +1,5 @@
-use crate::{process, CmdExecutor};
-
 use super::verify_path;
+use crate::{process, CmdExecutor};
 use clap::Parser;
 use enum_dispatch::enum_dispatch;
 use std::path::PathBuf;

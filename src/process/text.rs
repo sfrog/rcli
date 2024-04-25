@@ -1,10 +1,9 @@
+use crate::{command::TextSignFormat, get_reader, process_gen_pass};
 use anyhow::{Ok, Result};
 use base64::prelude::*;
 use ed25519_dalek::{Signature, Signer, SigningKey, Verifier, VerifyingKey};
 use rand::rngs::OsRng;
 use std::{fs, io::Read, path::Path};
-
-use crate::{command::TextSignFormat, get_reader, process_gen_pass};
 
 pub trait TextSign {
     /// Sign the input data

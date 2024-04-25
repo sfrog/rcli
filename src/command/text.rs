@@ -1,12 +1,9 @@
-use std::{fmt, path::PathBuf, str::FromStr};
-
+use super::{verify_file, verify_path};
+use crate::{process, CmdExecutor};
 use clap::Parser;
 use enum_dispatch::enum_dispatch;
+use std::{fmt, path::PathBuf, str::FromStr};
 use tokio::fs;
-
-use crate::{process, CmdExecutor};
-
-use super::{verify_file, verify_path};
 
 #[derive(Parser, Debug)]
 #[enum_dispatch(CmdExecutor)]

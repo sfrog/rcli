@@ -1,11 +1,8 @@
-use std::{fmt, str::FromStr};
-
+use super::verify_file;
+use crate::{process, CmdExecutor};
 use clap::Parser;
 use enum_dispatch::enum_dispatch;
-
-use crate::{process, CmdExecutor};
-
-use super::verify_file;
+use std::{fmt, str::FromStr};
 
 #[derive(Parser, Debug)]
 #[enum_dispatch(CmdExecutor)]
