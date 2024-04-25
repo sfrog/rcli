@@ -3,6 +3,7 @@
     "clippy",
     "csprng",
     "dalek",
+    "genpass",
     "nextest",
     "precompressed",
     "rcli",
