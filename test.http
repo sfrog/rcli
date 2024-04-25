@@ -1,0 +1,7 @@
+### test index
+
+GET http://localhost:8080/
+
+### test index
+
+GET http://localhost:8080/fixtures
