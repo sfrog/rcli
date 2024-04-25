@@ -1,7 +1,24 @@
 ### test index
-
 GET http://localhost:8080/
 
-### test index
+### test binary
+GET http://localhost:8080/fixtures/ed25519.pk
 
-GET http://localhost:8080/fixtures
+### test index
+GET http://localhost:8080/fixtures/
+
+### test txt file
+GET http://localhost:8080/Cargo.toml
+
+
+### test index in tower
+GET http://localhost:8080/tower
+
+### test binary in tower
+GET http://localhost:8080/tower/fixtures/ed25519.pk
+
+### test index in tower
+GET http://localhost:8080/tower/fixtures/
+
+### test txt file in tower
+GET http://localhost:8080/tower/Cargo.toml

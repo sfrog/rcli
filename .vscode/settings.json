@@ -4,6 +4,7 @@
     "csprng",
     "dalek",
     "nextest",
+    "precompressed",
     "rcli",
     "rustfmt",
     "urlsafe",
