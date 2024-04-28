@@ -1,4 +1,4 @@
-use crate::{command::TextSignFormat, get_reader, process_gen_pass};
+use crate::{command::TextSignFormat, get_reader, process_gen_pass, KeyLoader};
 use anyhow::{anyhow, Ok, Result};
 use base64::prelude::*;
 use chacha20poly1305::{
@@ -16,13 +16,6 @@ pub trait TextSign {
 pub trait TextVerify {
     /// Verify the input data
     fn verify(&self, reader: impl Read, sig: &[u8]) -> Result<bool>;
-}
-
-pub trait KeyLoader {
-    /// Load the key from the given path
-    fn load(path: impl AsRef<Path>) -> Result<Self>
-    where
-        Self: Sized;
 }
 
 pub trait KeyGenerator {

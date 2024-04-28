@@ -1,11 +1,14 @@
 {
   "cSpell.words": [
     "Chacha",
+    "chrono",
     "clippy",
     "csprng",
     "dalek",
     "encrypter",
     "genpass",
+    "humantime",
+    "jsonwebtoken",
     "nextest",
     "precompressed",
     "rcli",
