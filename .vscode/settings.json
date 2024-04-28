@@ -1,8 +1,10 @@
 {
   "cSpell.words": [
+    "Chacha",
     "clippy",
     "csprng",
     "dalek",
+    "encrypter",
     "genpass",
     "nextest",
     "precompressed",

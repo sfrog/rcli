@@ -14,6 +14,10 @@ pub enum TextSubCommand {
     Verify(TextVerifyOpts),
     #[command(about = "Generate a key pair")]
     Generate(GenerateOpts),
+    #[command(about = "Encrypt a message")]
+    Encrypt(EncryptOpts),
+    #[command(about = "Decrypt a message")]
+    Decrypt(DecryptOpts),
 }
 
 #[derive(Parser, Debug)]
@@ -75,6 +79,10 @@ impl CmdExecutor for GenerateOpts {
                 fs::write(name.join("ed25519.sk"), &keys[0]).await?;
                 fs::write(name.join("ed25519.pk"), &keys[1]).await?;
             }
+            TextSignFormat::Chacha => {
+                let name = self.output;
+                fs::write(name.join("chacha.key"), &keys[0]).await?;
+            }
         }
         Ok(())
     }
@@ -84,6 +92,7 @@ impl CmdExecutor for GenerateOpts {
 pub enum TextSignFormat {
     Blake3,
     Ed25519,
+    Chacha,
 }
 
 pub fn parse_sign_format(format: &str) -> Result<TextSignFormat, anyhow::Error> {
@@ -97,6 +106,7 @@ impl FromStr for TextSignFormat {
         match value {
             "blake3" => Ok(TextSignFormat::Blake3),
             "ed25519" => Ok(TextSignFormat::Ed25519),
+            "chacha" => Ok(TextSignFormat::Chacha),
             v => anyhow::bail!("Unsupported format: {}", v),
         }
     }
@@ -107,6 +117,7 @@ impl From<TextSignFormat> for &'static str {
         match format {
             TextSignFormat::Blake3 => "blake3",
             TextSignFormat::Ed25519 => "ed25519",
+            TextSignFormat::Chacha => "chacha",
         }
     }
 }
@@ -114,5 +125,37 @@ impl From<TextSignFormat> for &'static str {
 impl fmt::Display for TextSignFormat {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", Into::<&'static str>::into(*self))
+    }
+}
+
+#[derive(Parser, Debug)]
+pub struct EncryptOpts {
+    #[arg(short, long, value_parser = verify_file, default_value = "-")]
+    pub input: String,
+    #[arg(short, long, value_parser = verify_file)]
+    pub key: String,
+}
+
+impl CmdExecutor for EncryptOpts {
+    async fn execute(self) -> anyhow::Result<()> {
+        let encrypted = process::process_text_encrypt(&self.input, &self.key)?;
+        println!("{}", encrypted);
+        Ok(())
+    }
+}
+
+#[derive(Parser, Debug)]
+pub struct DecryptOpts {
+    #[arg(short, long, value_parser = verify_file, default_value = "-")]
+    pub input: String,
+    #[arg(short, long, value_parser = verify_file)]
+    pub key: String,
+}
+
+impl CmdExecutor for DecryptOpts {
+    async fn execute(self) -> anyhow::Result<()> {
+        let decrypted = process::process_text_decrypt(&self.input, &self.key)?;
+        println!("{}", decrypted);
+        Ok(())
     }
 }
